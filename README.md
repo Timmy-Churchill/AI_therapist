@@ -27,12 +27,6 @@ This project integrates a ChatBot , allowing users to interact with a basic chat
     pip install -r requirements.txt
     ```
 
-3. **Install Node.js dependencies:**
-
-    ```bash
-    npm install
-    ```
-
 4. **Create a `.env` file in the project root and add your OpenAI GPT-3 API key:**
 
     ```
