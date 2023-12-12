@@ -16,57 +16,58 @@ frontend_path = "indexTEST.html"  #Change to index.html for frontend with css
 
 # Access the API key from the environment
 api_key_openAI = os.getenv("API_KEY_OPENAI")
-api_key_emotions = os.getenv("API_KEY_EMOTIONS")
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secret key for session
-url = "https://api.apilayer.com/text_to_emotion"
 
 
 client = OpenAI(api_key=api_key_openAI)
-headers= {
-    "apikey": api_key_emotions
-  }
 
-def textToEmotions(text):
-  if isinstance(text, str) and len(text)>10:
-    payload = text.encode("utf-8")
-    response = requests.request("POST", url, headers=headers, data = payload)
-    status_code = response.status_code
-    result = response.text
+# api_key_emotions = os.getenv("API_KEY_EMOTIONS")
+# headers= {
+#     "apikey": api_key_emotions
+#   }
 
-    print(result)
-    result = json.loads(result)  # Convert JSON string to dictionary
-    values_array = np.array(list(result.values())) #Convert dict values into a numpy array
-    print(values_array)
-    return(values_array)
-  else:
-     return(np.array([0,0,0,0,0]))
+# def textToEmotions(text):
+#   if isinstance(text, str) and len(text)>10:
+#     payload = text.encode("utf-8")
+#     response = requests.request("POST", url, headers=headers, data = payload)
+#     status_code = response.status_code
+#     result = response.text
 
-def get_emotion_score(prompt):
-    final_role = "You are an expert in human emotion. Using the content of the message, return a very specific single emotion to summarize the message, followed by a colon, then exactly 5 numbers: each one a number from 0-10 grading, in order, the amount of Happiness, Anger, Surprise, Sadness, and Fear in the message. An example response would be 'Humiliated:2,5,7,5,5'"
+#     print(result)
+#     result = json.loads(result)  # Convert JSON string to dictionary
+#     values_array = np.array(list(result.values())) #Convert dict values into a numpy array
+#     print(values_array)
+#     return(values_array)
+#   else:
+#      return(np.array([0,0,0,0,0]))
 
-    completion = client.chat.completions.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": final_role},
-            {"role": "user", "content": prompt}
-        ]
-    )
+# def get_emotion_score(prompt):
+#     final_role = "You are an expert in human emotion. Using the content of the message, return a very specific single emotion to summarize the message, followed by a colon, then exactly 5 numbers: each one a number from 0-10 grading, in order, the amount of Happiness, Anger, Surprise, Sadness, and Fear in the message. An example response would be 'Humiliated:2,5,7,5,5'"
 
-    completion_message = completion.choices[0].message
-    total_string = completion_message.content
+#     completion = client.chat.completions.create(
+#         model="gpt-3.5-turbo",
+#         messages=[
+#             {"role": "system", "content": final_role},
+#             {"role": "user", "content": prompt}
+#         ]
+#     )
 
-    try:
-        parts = total_string.split(':')
-        word_part = parts[0]
-        emotions_string = parts[1]
-        number_list = emotions_string.split(',')
-        number_list = [int(num) for num in number_list]
-        emotions_array = np.array(number_list)
-    except Exception:
-        emotions_array = textToEmotions(prompt)
-    return(word_part, emotions_array)
+#     completion_message = completion.choices[0].message
+#     total_string = completion_message.content
+
+#     try:
+#         parts = total_string.split(':')
+#         word_part = parts[0]
+#         emotions_string = parts[1]
+#         number_list = emotions_string.split(',')
+#         number_list = [int(num) for num in number_list]
+#         emotions_array = np.array(number_list)
+#     except Exception:
+#         emotions_array = textToEmotions(prompt)
+#     return(word_part, emotions_array)
 
 def ask_chat(prompt):
     role = session.get('role', None)
@@ -87,11 +88,11 @@ def ask_chat(prompt):
         ]
     )
 
-    emotion_word, emotion_values = get_emotion_score(prompt)
+    # emotion_word, emotion_values = get_emotion_score(prompt)
 
     completion_message = completion.choices[0].message
     
-    return completion_message.content, final_role, emotion_word, emotion_values
+    return completion_message.content, final_role
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -106,9 +107,9 @@ def index():
         session['conversation_string'] += ("THERAPIST:  "+answer)
     
     if answer:
-        return render_template(frontend_path, answer=("ANSWER"+answer+"    HISTORY"+session['conversation_string']+ "    ROLE" + final_role + "EMOTIONS" + str(emotion_values)+emotion_word),emotion_word=emotion_word, emotion_values=emotion_values)
+        return render_template(frontend_path, answer=(answer))
     else:
         session['conversation_string'] = ''
-        return render_template(frontend_path, answer = answer, emotion_word=emotion_word, emotion_values=emotion_values)
+        return render_template(answer)
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

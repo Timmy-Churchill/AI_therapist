@@ -17,8 +17,8 @@ This project integrates a ChatBot , allowing users to interact with a basic chat
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/your-repo.git
-    cd your-repo
+    git clone https://github.com/Timmy-Churchill/AI_therapist.git
+    cd AI_therapist
     ```
 
 2. **Install Python dependencies:**
@@ -30,8 +30,9 @@ This project integrates a ChatBot , allowing users to interact with a basic chat
 4. **Create a `.env` file in the project root and add your OpenAI GPT-3 API key:**
 
     ```
-    OPENAI_API_KEY=your-api-key
+    API_KEY_OPENAI="your key"
     ```
+
 
     **Note:** Ensure that the `.env` file is added to the `.gitignore` file to avoid exposing sensitive information.
 
@@ -60,6 +61,7 @@ This project integrates a ChatBot , allowing users to interact with a basic chat
 - The `indexTEST.html` file serves as a testing interface for the backend logic.
 - The `index.html` file is the working frontend that communicates with the backend.
 - Make sure to adjust the 'Frontend path' variable in app.py according to which one you want to see
+- Also I commented out all the pentagon stuff on app.py (still there though)
 
 ## Contributing
 
