@@ -1,0 +1,68 @@
+.green-rectangle {
+    background-color: darkgreen;
+    height: 100px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.AI-Therapist {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    font-size: 300px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Layout {
+    display: flex;
+}
+
+.Invis {
+    display: flex;
+    padding-left: 100px;
+    height: 200px;
+}
+
+.MiniRectangle {
+    /*display: flex;*/
+    margin-left: 100px;
+    height: 5px;
+    width: 180px;
+    background-color: rgb(174, 174, 174);
+}
+
+.Title {
+    display: flex;
+    padding-left: 100px;
+    align-items: center;
+    height: 100px;
+    font-size: 50px;
+}
+
+.Subtitle {
+    display: flex;
+    padding-left: 100px;
+    font-size: 25px;
+    color: gray;
+    height: 110px;
+}
+
+.Subsubtitle {
+    display: flex;
+    padding-left: 100px;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.Subsubsubtitle {
+    display: flex;
+    padding-left: 100px;
+    font-size: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}

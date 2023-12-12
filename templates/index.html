@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles1.css" />
+    <title>ChatBot</title>
+</head>
+<body>
+    <h1>Basic ChatBot</h1>
+
+    <div class="Layout">
+        <div class="writing-container">
+            <div class = "green-rectangle">
+              <div class = "title">AI-Therapist</div>
+            </div>
+
+            <div class = "MiniRectangle"></div>
+
+            <div class = "Invis"></div>
+
+            <div class = "Title">
+                <h1>
+                    AI Therapist
+                </h1>
+            </div>
+
+            <div class = "Subtitle">
+                <h2>
+                    text
+                </h2>
+            </div>
+
+            <div class = "Subsubtitle">
+                <h3>
+                    text
+                </h3>
+            </div>
+
+            <div class = "Subsubsubtitle">
+                <h3>
+                    text
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="Backend"
+        <form method="post">
+            {% if not(answer) %}
+                <label for="role">Role:</label>
+                <input type="text" name="role" required>
+            {% endif %}
+
+            <label for="prompt">Prompt:</label>
+            <input type="text" name="prompt" required>
+
+            <button type="submit">Get answer</button>
+
+            {% if answer %}
+            <p>Answer: {{ answer }}</p>
+            {% endif %}
+        </form>
+    </div>
+
+</body>
+</html>
