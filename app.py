@@ -12,6 +12,8 @@ import requests
 
 load_dotenv()
 
+frontend_path = "indexTEST.html"  #Change to index.html for frontend with css
+
 # Access the API key from the environment
 api_key_openAI = os.getenv("API_KEY_OPENAI")
 api_key_emotions = os.getenv("API_KEY_EMOTIONS")
@@ -104,9 +106,9 @@ def index():
         session['conversation_string'] += ("THERAPIST:  "+answer)
     
     if answer:
-        return render_template('indexTEST.html', answer=("ANSWER"+answer+"    HISTORY"+session['conversation_string']+ "    ROLE" + final_role + "EMOTIONS" + str(emotion_values)+emotion_word),emotion_word=emotion_word, emotion_values=emotion_values)
+        return render_template(frontend_path, answer=("ANSWER"+answer+"    HISTORY"+session['conversation_string']+ "    ROLE" + final_role + "EMOTIONS" + str(emotion_values)+emotion_word),emotion_word=emotion_word, emotion_values=emotion_values)
     else:
         session['conversation_string'] = ''
-        return render_template('indexTEST.html', answer = answer, emotion_word=emotion_word, emotion_values=emotion_values)
+        return render_template(frontend_path, answer = answer, emotion_word=emotion_word, emotion_values=emotion_values)
 if __name__ == '__main__':
-    app.run(debug=True, port=8081)
+    app.run(debug=True, port=8080)
