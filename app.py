@@ -7,14 +7,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
 import requests
+
+load_dotenv()
+
+# Access the API key from the environment
+api_key_openAI = os.getenv("API_KEY_OPENAI")
+api_key_emotions = os.getenv("API_KEY_EMOTIONS")
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Set a secret key for session
 url = "https://api.apilayer.com/text_to_emotion"
-client = OpenAI(api_key='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')
+
+
+client = OpenAI(api_key=api_key_openAI)
 headers= {
-    "apikey": "4ylRLhjXs7UPYtWJMNUDxoBmRSyMTT5V"
+    "apikey": api_key_emotions
   }
 
 def textToEmotions(text):
